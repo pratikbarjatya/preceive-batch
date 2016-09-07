@@ -1,0 +1,13 @@
+#
+# Definitions of providers of sources
+# This enables plugging in various file formats etc.
+#
+
+# Support for Line Reading
+io.theysay.preceive.batch.sources.LineSourceProvider
+
+# Support for Json Line Reading
+io.theysay.preceive.batch.sources.JsonSourceProvider
+
+
+

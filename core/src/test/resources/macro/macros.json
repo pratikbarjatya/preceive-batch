@@ -1,0 +1,27 @@
+{
+  "macros": [
+    {
+      "option": "dummy",
+      "usage": "This is a dummy",
+      "arguments": [
+        "-copy-input-data-as",
+        "input",
+        "-endpoints",
+        "sentiment=/v1/sentiment?level=document",
+        "emotion=/v1/emotion?level=document",
+        "topics=/v1/topic",
+        "-batch"
+      ]
+    },
+    {
+      "option": "another",
+      "usage": "This is another dummy",
+      "arguments": [
+        "-copy-input-data-as",
+        "input",
+        "-endpoints",
+        "-batch"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+dependencies {
+    compile project(':core')
+
+    compile group: 'org.apache.poi', name: 'poi-ooxml', version: '3.14'
+
+}

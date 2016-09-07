@@ -1,0 +1,58 @@
+apply plugin: 'application'
+
+mainClassName = "io.theysay.preceive.batch.application.Main"
+applicationName = "preceive-cli"
+
+buildscript {
+    repositories {
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+    dependencies {
+        classpath 'org.pegdown:pegdown:1.6.0'
+    }
+}
+
+
+
+dependencies {
+    compile project(':plugins:tsv-plugin')
+    compile project(':plugins:excel-plugin')
+}
+
+import groovy.text.SimpleTemplateEngine
+import org.pegdown.PegDownProcessor
+
+task generateDocs() {
+
+    def processor = new PegDownProcessor()
+
+    def template = new SimpleTemplateEngine().createTemplate(file('src/templates/template.tpl'))
+
+    def outputDir = mkdir("$buildDir/readme")
+
+    def sourceFiles = files( file("src/markdown").listFiles())
+
+
+    sourceFiles.each { File file ->
+        Map data = [body: processor.markdownToHtml(file.text.replace(".md",".html"))]
+
+        File dest = new File(outputDir, file.name.replace(".md",".html") );
+        template.make(data).writeTo(new FileWriter(dest));
+    }
+    outputs.dir outputDir
+
+}
+
+distributions {
+    main {
+        contents {
+            from(generateDocs) {
+                into "readme"
+            }
+            from('src/dist/bin') {
+                into "bin"
+                fileMode = 0755
+            }
+        }
+    }
+}

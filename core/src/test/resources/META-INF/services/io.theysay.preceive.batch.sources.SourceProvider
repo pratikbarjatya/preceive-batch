@@ -1,0 +1,4 @@
+#
+# Definitions of providers of sources
+# This enables plugging in various file formats etc.
+#

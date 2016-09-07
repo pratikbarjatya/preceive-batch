@@ -1,0 +1,17 @@
+
+******************************************
+*** Batch Client for PreCeive REST API ***
+******************************************
+
+Copyright 2012-2016 TheySay Ltd.
+All Rights Reserved.
+
+Have a nice day.
+
+<USAGE_EXAMPLE>
+
+   export THEYSAY_USER=<>
+   export THEYSAY_PASSWORD=<>
+   bin\preceive-cli -output ./output/responses.json -threads 2 -endpoints /v1/sentiment?level=document -batch ./corpus/getting_started.json
+
+</USAGE_EXAMPLE>

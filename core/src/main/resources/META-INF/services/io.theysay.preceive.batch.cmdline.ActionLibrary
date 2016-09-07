@@ -1,0 +1,8 @@
+#
+# Register TSV specific options and tasks
+#
+
+io.theysay.preceive.batch.options.ClientOptions
+io.theysay.preceive.batch.options.ProcessOptions
+io.theysay.preceive.batch.options.DataOptions
+io.theysay.preceive.batch.options.OutputOptions

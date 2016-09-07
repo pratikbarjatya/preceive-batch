@@ -1,0 +1,23 @@
+#
+# Recognised Mime Types
+# Format is
+# mimetype extension1 extension2 ...
+#
+# See https://docs.oracle.com/javase/7/docs/api/javax/activation/MimetypesFileTypeMap.html
+# for more information
+
+application/x-gzip gz
+
+text/plain txt
+text/tab-separated-values tsv tab tsv.gz tab.gz
+text/csv csv csv.gz
+text/html html htm
+
+
+
+
+application/json json json.gz
+
+
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet xlsx
+application/vnd.ms-excel xls

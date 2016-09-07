@@ -1,0 +1,16 @@
+#
+# Definitions of providers of destinations
+# This enables plugging in various file formats etc.
+#
+
+# Support for Line Writer
+io.theysay.preceive.batch.destination.LineDestinationProvider
+
+# Support for JSON Writing
+io.theysay.preceive.batch.destination.JsonDestinationProvider
+
+
+
+
+
+

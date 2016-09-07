@@ -1,0 +1,11 @@
+*.class
+build/
+target/
+# local configuration file (for Android sdk path, etc)
+local.properties
+.DS_Store
+.classpath
+.project
+*.iml
+.idea
+.gradle

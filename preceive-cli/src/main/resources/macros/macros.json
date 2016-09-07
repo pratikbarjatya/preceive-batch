@@ -1,0 +1,18 @@
+{
+  "macros": [
+    {
+      "option": "document-analysis",
+      "usage":
+      "Perform a standard analysis of document emotions,sentiment,topics.\n e.g. preceive-cli -output results.json -document-analysis file1 file2 file3",
+      "arguments": [
+        "-copy-input-data-as",
+        "input",
+        "-endpoints",
+        "results.sentiment=/v1/sentiment?level=document",
+        "results.emotion=/v1/emotion?level=document",
+        "results.topics=/v1/topic",
+        "-batch"
+      ]
+    }
+  ]
+}

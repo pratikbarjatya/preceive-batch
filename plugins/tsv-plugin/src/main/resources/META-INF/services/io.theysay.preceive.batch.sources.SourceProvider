@@ -1,0 +1,10 @@
+#
+# Definitions of providers of sources
+# This enables plugging in various file formats etc.
+#
+
+# Support for Fixed TSV Files Reading
+io.theysay.preceive.batch.plugins.tsv.TSVSourceProvider
+
+
+

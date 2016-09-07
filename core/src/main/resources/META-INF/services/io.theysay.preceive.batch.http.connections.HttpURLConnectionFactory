@@ -1,0 +1,8 @@
+#
+# Interceptors to redirect the submission of output
+#
+#
+
+# This enables the 'sim:' protocol for general testing...
+
+io.theysay.preceive.batch.http.connections.SimulateAPIConnectionFactory

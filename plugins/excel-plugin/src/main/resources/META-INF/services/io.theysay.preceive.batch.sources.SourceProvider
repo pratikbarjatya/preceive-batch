@@ -1,0 +1,10 @@
+#
+# Definitions of providers of sources
+# This enables plugging in various file formats etc.
+#
+
+# Support for XLSX Reading
+io.theysay.preceive.batch.plugins.excel.XLSXSourceProvider
+
+
+

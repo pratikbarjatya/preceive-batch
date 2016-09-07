@@ -1,0 +1,4 @@
+DUMMY HELP FILE
+---------------
+
+This file is only used in testing the help functionality.

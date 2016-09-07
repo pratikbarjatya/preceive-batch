@@ -1,0 +1,6 @@
+#
+# Register TSV specific options and tasks
+#
+
+io.theysay.preceive.batch.plugins.tsv.TSVOptions
+
