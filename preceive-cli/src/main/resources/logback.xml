@@ -3,11 +3,11 @@
   <property name="LOG_DIR" value="."/>
 
   <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>${LOG_DIR}/preceive-client.log</file>
+    <file>${LOG_DIR}/preceive-cli.log</file>
 
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <!-- rollover daily -->
-      <fileNamePattern>${LOG_DIR}/preceive-client-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+      <fileNamePattern>${LOG_DIR}/preceive-cli-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
 
       <timeBasedFileNamingAndTriggeringPolicy
           class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
