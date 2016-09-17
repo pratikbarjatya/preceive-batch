@@ -1,9 +1,11 @@
-#Command Line Options 
-The full list of command line options can be displayed using
+# Command Line Options
+
+The full list of command line options for the app can be displayed with the `-help` argument:
 
 	bin/preceive-cli -help
 
-### Currently available options
+
+The following options are currently available:
 
 	-help
 		Display the help and usage information for this app.
@@ -18,35 +20,38 @@ The full list of command line options can be displayed using
 		The PreCeive REST API service to use.
 
 	-threads
-		The number of concurrent threads/connections during batch processing.
+		The number of concurrent threads (connections) to be used for a batch processing run.
 
 	-backlog
-		The maximum number of items to be held in memory during batch processing.
+		The maximum number of raw texts to be held in memory during a batch processing run.
 
 	-endpoints
-		The PreCeive REST API endpoints to call.
-		Each endpoint is of the form [field in result json]=[api path][?level=document|sentiment]
-		e.g. -endpoints document.sentiment=/v1/sentiment?level=document sentence.sentiment=v1/sentiment?level=sentence
+		The TheySay PreCeive REST API endpoints to call.
+		Each endpoint is of the form [field in output JSON]=[api path][?level=document|sentiment]
+		Example: -endpoints document.sentiment=/v1/sentiment?level=document sentence.sentiment=v1/sentiment?level=sentence
 
 	-copy-input-data-as
-		The field under which to store the original submitted data in the result. 
+		The field under which to store the original submitted data in the result.
 
 	-input-text
-		The field in the input data that contains the core text content to be processed.
+		The field in the input data which contains the core text content that you want to process.
 
 	-input-id
-		The field in the input data that represents the id of each text. By default, an auto-generated ID will be used.
+		The field in the input data that represents the ID of each text.
+		By default, an auto-generated ID is used.
 
 	-tsv-newline
-		Replace each occurrence of the specified string with a newline character.
+		An escape string for input texts that span multiple lines.
+		All occurrences of the specified string in the input data will be converted into a newline character ('\n').
+		Example: @@NEWLINE@@
 
 	-batch
-		Process the files provided as arguments consistent with the previously specified options.
-		The results will be save to the file specified using the -output option.
-		 e.g. ... -batch <file1> <file2> <file3>
+		The input data files to be processed in a batch processing run.
+		The file names need to be separated by a space character.
+		Example: ... -batch <file1> <file2> <file3>
 
 	-process-documents
-		Process each provided document one at a time and write the results for each document to a separate file.
+		Process each input document one at a time and write the results for each document to a separate output file.
 		-output value is used as a template inserting the current inputfile name before the extension.
 		For example for texts.tsv -output results/output.json -> results/output.texts.tsv.json.
 		The extension is included to ensure that the results for x.tsv and x.json do not overwrite each other.
@@ -57,8 +62,9 @@ The full list of command line options can be displayed using
 		 e.g. preceive-cli -output results.json -document-analysis file1 file2 file3
 
 	-output
-		The file to which the responses will be saved. Use the suffix `json.gz` to gzip the output file.
+		The file to which the responses from TheySay's PreCeive REST API will be saved.
+		Use the suffix `json.gz` to gzip the output file.
 
 	-max-records-per-file
-		Maximum number of records to write to an individual file. (< 0 is unlimited)
-
+		The maximum number of response objects to write to an individual output file.
+		For an unlimited number, use a negative value (< 0).

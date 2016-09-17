@@ -42,4 +42,3 @@ To jacoco code coverage (results will be build/reports/jacoco/jacocoRootReport/h
 
 	$ ./gradlew jacocoRootReport 
 
-
