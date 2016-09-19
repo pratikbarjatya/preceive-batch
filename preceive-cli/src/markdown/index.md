@@ -49,7 +49,7 @@ There are currently two ways to submit your credentials.
 
 The app ships with an example script which illustrate how to submit data from local files to PreCeive REST API.
 
-To run the example (```getting_started.json```):
+To run the example script (```bin/getting_started.sh```):
 
 	$ bin/preceive-cli -user <username> -password <password> -output results/results.json -endpoints /v1/sentiment -batch corpus/getting_started.json corpus/getting_started.tsv corpus/getting_started.json
 
@@ -175,4 +175,4 @@ The full list of command line options for the app can be displayed with the `-he
 
 	bin/preceive-cli -help
 
-The options are also listed in [/commandline.md](./commandline.md).
+The options are also listed in [readme/commandline.html](./readme/commandline.html).

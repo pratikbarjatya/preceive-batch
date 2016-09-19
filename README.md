@@ -6,7 +6,7 @@ A simple local batch processing utility app for TheySay PreCeive REST API.
 
 ## Getting Started
 
-Precompiled binaries, either ```preceive-cli.zip``` or ```preceive-cli.tar```, can be downloaded via the ```[clone or download]``` button of this GitHub repository.
+Precompiled binaries, either ```preceive-cli.zip``` or ```preceive-cli.tar```, can be downloaded from the GitHub repository at [https://github.com/theysay/preceive-batch/releases](https://github.com/theysay/preceive-batch/releases).
 
 You will need Java 8 to run the app.
 If you do not have it, download Java [here](https://java.com/en/download/).
