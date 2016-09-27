@@ -19,12 +19,14 @@ dependencies {
     compile project(':plugins:excel-plugin')
 }
 
+
 import groovy.text.SimpleTemplateEngine
+import org.pegdown.Extensions
 import org.pegdown.PegDownProcessor
 
 task generateDocs() {
 
-    def processor = new PegDownProcessor()
+    def processor = new PegDownProcessor(Extensions.ALL)
 
     def template = new SimpleTemplateEngine().createTemplate(file('src/templates/template.tpl'))
 

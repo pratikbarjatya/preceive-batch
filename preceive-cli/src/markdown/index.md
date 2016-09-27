@@ -107,10 +107,22 @@ Currently only ```json``` output is supported.
 The output file (to which the app appends the responses from PreCeive REST API) contains one (1) JSON response object per line.
 For detailed information about the fields and structure of each JSON object, please consult [TheySay PreCeive REST API Documentation](http://docs.theysay.apiary.io).
 
+### Endpoints
+
+The ```-endpoints``` option specifies the analyses that are required to be performed on the input data. 
+It takes the form of ```<enpoint url>``` for example ```/v1/sentiment```. 
+
+
+#### Adding Parameters
+
+Additional parameters to the endpoint can be provided by append '?' followed by key=value pairs for example, ```/v1/sentiment?level=sentence```.
+The keys and values are processed such that ```/v1/sentiment?bias.positive=2&bias.negative=1&bias.neutral=0.5``` allows the specifying of the sentiments bias settings as described in the API documentation.
+
+
 #### Wrapper Fields for Multi-endpoint Calls
 
 The app allows you to submit a single piece of text to multiple PreCeive REST API analysis endpoints.
-You can use the `-endpoints` string argument to specify the PreCeive REST API endpoints that will be called.
+The `-endpoints` will accept multiple string arguments each will be called for each text and collected in the result.
 
 Since calls to multiple endpoints generate multiple responses, you can specify wrapper fields for the output data to organise, align, and manage the responses received. For example, you could run both document- and sentence-level sentiment analysis and store their responses in two separate containers in the final JSON output (e.g. `sentiment.document` for the former and `sentiment.sentence` for the latter) with the following `-endpoints` arguments:
 
@@ -175,4 +187,4 @@ The full list of command line options for the app can be displayed with the `-he
 
 	bin/preceive-cli -help
 
-The options are also listed in [readme/commandline.html](./readme/commandline.html).
+The options are also listed in [./commandline.html](./commandline.html).
