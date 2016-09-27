@@ -34,6 +34,20 @@ import java.util.Map;
 
 @SuppressWarnings("unchecked")
 public class Datum extends LinkedHashMap<String, Object> {
+    private static final Map<String, Object> CONSTANTS;
+
+    static {
+        CONSTANTS = new LinkedHashMap<>();
+        CONSTANTS.put("true", Boolean.TRUE);
+        CONSTANTS.put("false", Boolean.FALSE);
+        CONSTANTS.put("yes", Boolean.TRUE);
+        CONSTANTS.put("no", Boolean.FALSE);
+        CONSTANTS.put("on", Boolean.TRUE);
+        CONSTANTS.put("off", Boolean.FALSE);
+        CONSTANTS.put("0", 0);
+        CONSTANTS.put("1", 1);
+
+    }
 
     public static final String AUTO_ID = "_autoid";
     public static final String ROW_ID = "_rowid";
@@ -154,5 +168,33 @@ public class Datum extends LinkedHashMap<String, Object> {
 
     public void set(DataPath path, Object content) {
         set(path.getPath(), content);
+    }
+
+    public Datum parseKeyValues() {
+        Datum result = new Datum();
+        for (Map.Entry<String, Object> entry : this.entrySet()) {
+            DataPath path = DataPath.valueOf(entry.getKey());
+            Object value = entry.getValue();
+            if (value instanceof String) {
+                value = tryConvert((String) value);
+            }
+            result.set(path, value);
+        }
+        return result;
+    }
+
+    private Object tryConvert(String value) {
+        if (value == null) return null;
+        value = value.trim();
+        if (value.isEmpty()) return value;
+
+        Object constant = CONSTANTS.get(value.toLowerCase());
+        if (constant != null)
+            return constant;
+        try {
+            return Double.valueOf(value);
+        } catch (NumberFormatException nfe) {
+            return value;
+        }
     }
 }

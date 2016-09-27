@@ -93,8 +93,10 @@ public final class EndPoint {
         }
         String path = spec;
 
-        Datum params = Utilities.parseEncodedMap(querystring);
-        return new EndPoint(field, path, params);
+        Datum simple = Utilities.parseEncodedMap(querystring);
+        Datum nested = simple.parseKeyValues();
+
+        return new EndPoint(field, path, nested);
     }
 
     @Override

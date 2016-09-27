@@ -55,6 +55,16 @@ public class TestEndpoint {
     }
 
     @Test
+    public void testBiasSettings() throws Exception {
+        EndPoint biased = EndPoint.valueOf("a.b.x=/v1/sentiment?level=sentence&bias.negative=10&bias.positive=10");
+        Datum params = biased.copyParameters();
+        Assert.assertEquals(10,params.asNumber("bias","negative").intValue());
+        Assert.assertEquals(10,params.asNumber("bias","positive").intValue());
+        Assert.assertEquals("sentence",params.asString("level"));
+        Assert.assertNull(params.asNumber("bias","neutral"));
+    }
+
+    @Test
     public void testParamCopy() throws Exception {
 
 
@@ -79,9 +89,9 @@ public class TestEndpoint {
     public void testParseParameters() throws Exception {
 
         String[] variants = {
-                "a.b.x=/v1/sentiment?level=sentence",
-                "a=/v1/sentiment?level=sentence",
-                "/v1/sentiment?level=sentence"
+            "a.b.x=/v1/sentiment?level=sentence",
+            "a=/v1/sentiment?level=sentence",
+            "/v1/sentiment?level=sentence"
         };
         Datum expected = new Datum("level", "sentence");
         for (String variant : variants) {
@@ -94,10 +104,10 @@ public class TestEndpoint {
     public void testParsePath() throws Exception {
 
         String[] variants = {
-                "a.b.x=/v1/sentiment?level=sentence&ff.xx=xx",
-                "a.b.x=/v1/sentiment",
-                "/v1/sentiment?level=sentence",
-                "/v1/sentiment",
+            "a.b.x=/v1/sentiment?level=sentence&ff.xx=xx",
+            "a.b.x=/v1/sentiment",
+            "/v1/sentiment?level=sentence",
+            "/v1/sentiment",
         };
         for (String variant : variants) {
             EndPoint endPoint = EndPoint.valueOf(variant);
@@ -108,9 +118,9 @@ public class TestEndpoint {
     @Test
     public void testParseNoField() throws Exception {
         String[] variants = {
-                "/v1/sentiment?level=sentence&ff.xx=xx",
-                "/v1/sentiment",
-                "/v1/sentiment?level=sentence"
+            "/v1/sentiment?level=sentence&ff.xx=xx",
+            "/v1/sentiment",
+            "/v1/sentiment?level=sentence"
         };
         DataPath fieldPath = EndPoint.RESPONSE_FIELDNAME;
         testFieldPaths(variants, fieldPath);
@@ -119,9 +129,9 @@ public class TestEndpoint {
     @Test
     public void testParseSinglePathField() throws Exception {
         String[] variants = {
-                "a=/v1/sentiment?level=sentence&ff.xx=xx",
-                "a=/v1/sentiment",
-                "a=/v1/sentiment?level=sentence"
+            "a=/v1/sentiment?level=sentence&ff.xx=xx",
+            "a=/v1/sentiment",
+            "a=/v1/sentiment?level=sentence"
         };
         DataPath fieldPath = new DataPath("a");
         testFieldPaths(variants, fieldPath);
@@ -130,9 +140,9 @@ public class TestEndpoint {
     @Test
     public void testParseMultiPathField() throws Exception {
         String[] variants = {
-                "a.b=/v1/sentiment?level=sentence&ff.xx=xx",
-                "a.b=/v1/sentiment",
-                "a.b=/v1/sentiment?level=sentence"
+            "a.b=/v1/sentiment?level=sentence&ff.xx=xx",
+            "a.b=/v1/sentiment",
+            "a.b=/v1/sentiment?level=sentence"
         };
         DataPath fieldPath = new DataPath("a", "b");
 
