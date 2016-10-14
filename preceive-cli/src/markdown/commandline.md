@@ -28,7 +28,7 @@ The following options are currently available:
 -endpoints
 : The TheySay PreCeive REST API endpoints to call.
 : Each endpoint is of the form [field in output JSON]=[api path][?level=document|sentiment]
-: Example:  -endpoints document.sentiment=/v1/sentiment?level=document sentence.sentiment=v1/sentiment?level=sentence
+: Example:  -endpoints document.sentiment=/v1/sentiment?level=document sentence.sentiment=/v1/sentiment?level=sentence
 
 -copy-input-data-as
 : The field under which to store the original submitted data in the result.
