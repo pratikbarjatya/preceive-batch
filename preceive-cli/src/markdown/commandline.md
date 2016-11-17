@@ -61,6 +61,26 @@ The following options are currently available:
 : Perform a standard analysis of document emotions,sentiment,topics.
 :  e.g. preceive-cli -output results.json -document-analysis file1 file2 file3
 
+-list-topic-keywords
+: Print TSV of the current topic keywords
+
+-set-topic-keywords
+: -set-topic-keywords <xlsx> file will remove existing keywords and set the current resources to the values provided in
+: the xlsx file. Note fields are classLabel text and weight
+
+-delete-topic-keywords
+: Remove all existing entries
+
+-list-ner-assertions
+: Print TSV of the current named entity assertions
+
+-set-topic-keywords
+: -set-ner-assertions <xlsx> file will remove existing assertions and set the current resources to the values provided in
+: the xlsx file. Note fields are classLabel and text 
+
+-delete-ner-assertions
+: Remove all existing entries
+
 -output
 : The file to which the responses from TheySay's PreCeive REST API will be saved.
 : Use the suffix `json.gz` to gzip the output file.
