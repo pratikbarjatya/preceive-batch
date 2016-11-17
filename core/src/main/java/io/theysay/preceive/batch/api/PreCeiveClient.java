@@ -29,6 +29,7 @@
 package io.theysay.preceive.batch.api;
 
 import io.theysay.preceive.batch.http.*;
+import io.theysay.preceive.batch.utils.Datum;
 import io.theysay.preceive.batch.utils.JsonUtils;
 import io.theysay.preceive.batch.utils.Utilities;
 import org.slf4j.Logger;
@@ -38,7 +39,7 @@ import java.io.IOException;
 
 public class PreCeiveClient {
     private final static Logger _LOGGER = LoggerFactory.getLogger(PreCeiveClient.class);
-    public static final String TOPIC_RESOURCE_LIST = "/v1/resources/topics/keywords";
+    public static final String TOPIC_RESOURCES = "/v1/resources/topics/keywords";
 
     private AbstractHttpClient client;
     private RequestMonitor monitor;
@@ -92,8 +93,12 @@ public class PreCeiveClient {
         return getConfiguration().fullPath(path);
     }
 
+    public String completePath(ApiResource apiResource) {
+        return getConfiguration().fullPath(apiResource.path);
+    }
+
     public boolean checkCredentials() throws IOException {
-        return client.get(completePath(TOPIC_RESOURCE_LIST)).getStatus() != StatusCode.Unauthorized;
+        return client.get(completePath(TOPIC_RESOURCES)).getStatus() != StatusCode.Unauthorized;
     }
 
     public String getApiService() {
@@ -107,5 +112,24 @@ public class PreCeiveClient {
 
     public ClientSettings getConfiguration() {
         return client.getConfiguration();
+    }
+
+
+    public Datum[] list(ApiResource apiResource) throws IOException {
+        return client.get(completePath(apiResource)).asList();
+    }
+
+    public void delete(ApiResource apiResource, Datum instance) throws IOException {
+        client.delete(completePath(apiResource) + "/" + instance.asString("id")).validate();
+    }
+
+    public void deleteAll(ApiResource apiResource) throws IOException {
+        for (Datum item : list(apiResource)) {
+            delete(apiResource, item);
+        }
+    }
+
+    public void add(ApiResource apiResource, Datum instance) throws IOException {
+        client.post(completePath(apiResource), JsonUtils.toString(instance)).validate();
     }
 }

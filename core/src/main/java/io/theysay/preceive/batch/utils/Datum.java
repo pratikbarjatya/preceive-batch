@@ -197,4 +197,14 @@ public class Datum extends LinkedHashMap<String, Object> {
             return value;
         }
     }
+
+    public String tsv(String... fields) {
+        StringBuilder b = new StringBuilder();
+        for (int i = 0 ; i < fields.length ; i++) {
+            if (i != 0) b.append("\t");
+            Object val = get(fields[i]);
+            if (val != null) b.append(val);
+        }
+        return b.toString();
+    }
 }

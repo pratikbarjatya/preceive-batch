@@ -91,4 +91,20 @@ public class TestXLSXSource {
         }
 
     }
+
+    @Test
+    public void testEmptyCells() throws Exception {
+        Resource xlsxResource = Resource.valueOf("classpath://empty-cell-bug.xlsx");
+        Source<Datum> source = Sources.create(xlsxResource, Datum.class);
+        List<Datum> read = Sources.read(source);
+        Assert.assertEquals(7, read.size());
+        int empties = 0;
+        for (Datum datum : read) {
+            Assert.assertNotNull(datum.asString("id"));
+            if (datum.asString("text")==null)
+                empties++;
+        }
+        Assert.assertEquals(1,empties);
+
+    }
 }

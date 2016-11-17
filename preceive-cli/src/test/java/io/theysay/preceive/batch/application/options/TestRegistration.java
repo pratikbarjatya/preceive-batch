@@ -40,6 +40,12 @@ public class TestRegistration {
 
         Assert.assertTrue(context.actions().contains(Applications.BATCH));
         Assert.assertTrue(context.actions().contains(Applications.PROCESS_DOCUMENTS));
+        Assert.assertTrue(context.actions().contains(Applications.LIST_TOPICS));
+        Assert.assertTrue(context.actions().contains(Applications.SET_TOPICS));
+        Assert.assertTrue(context.actions().contains(Applications.DELETE_TOPICS));
+        Assert.assertTrue(context.actions().contains(Applications.LIST_NAMED_ENTITY_ASSERTIONS));
+        Assert.assertTrue(context.actions().contains(Applications.SET_NAMED_ENTITY_ASSERTIONS));
+        Assert.assertTrue(context.actions().contains(Applications.DELETE_NAMED_ENTITY_ASSERTIONS));
         for (Macro macro : Applications.MACROS) {
             Assert.assertTrue(context.actions().contains(macro));
         }

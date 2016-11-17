@@ -110,9 +110,12 @@ public class XLSXSourceProvider implements SourceProvider {
 
         @Override
         public Datum next() {
-            if (!rows.hasNext())
-                return null;
-            return read(nextRow());
+            while (rows.hasNext()) {
+                Datum read = read(nextRow());
+                if (read != null)
+                    return read;
+            }
+            return null;
         }
 
         public Datum read(XSSFRow row) {
@@ -125,6 +128,8 @@ public class XLSXSourceProvider implements SourceProvider {
                     datum.put(header, value);
                 }
             }
+            if (datum.isEmpty())
+                return null;
             int rowNum = row.getRowNum();
             datum.put(Datum.AUTO_ID, resource.getName() + ":" + rowNum);
             datum.put(Datum.ROW_ID, rowNum);
@@ -137,19 +142,24 @@ public class XLSXSourceProvider implements SourceProvider {
         }
 
         public Object get(XSSFCell cell) {
-            int cellType = cell.getCellType();
-            switch (cellType) {
-                case Cell.CELL_TYPE_NUMERIC:
-                    return cell.getNumericCellValue();
-                case Cell.CELL_TYPE_BOOLEAN:
-                    return cell.getBooleanCellValue();
-                default:
-                    try {
-                        return cell.getStringCellValue();
-                    } catch (IllegalStateException mismatch) {
-                        return null;
-                    }
+            if (cell != null) {
+                int cellType = cell.getCellType();
+                switch (cellType) {
+                    case Cell.CELL_TYPE_NUMERIC:
+                        return cell.getNumericCellValue();
+                    case Cell.CELL_TYPE_BOOLEAN:
+                        return cell.getBooleanCellValue();
+                    default:
+                        try {
+                            return cell.getStringCellValue();
+                        } catch (IllegalStateException mismatch) {
+                            return null;
+                        }
+                }
+            } else {
+                return null;
             }
+
         }
     }
 }
