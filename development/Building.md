@@ -1,4 +1,4 @@
-# Building the App 
+# Building the App
 
 ## Dependencies
 
@@ -34,11 +34,10 @@ Following the above build steps, scripts for running the distribution on *nix an
 
 	./preceive-cli/build/install/preceive-cli/bin/preceive-cli.bat
 
-To compile the app's html documentation: 
+To compile the app's html documentation:
 
 	$ ./gradlew generateDocs
 
-To jacoco code coverage (results will be build/reports/jacoco/jacocoRootReport/html/index.html)  
+To jacoco code coverage (results will be build/reports/jacoco/jacocoRootReport/html/index.html)
 
-	$ ./gradlew jacocoRootReport 
-
+	$ ./gradlew jacocoRootReport
