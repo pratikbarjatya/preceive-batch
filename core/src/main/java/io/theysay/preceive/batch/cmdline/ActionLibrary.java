@@ -31,7 +31,7 @@ package io.theysay.preceive.batch.cmdline;
 import java.util.Comparator;
 
 /**
- * This is an Service that can be used to add custom
+ * This is a Service that can be used to add custom
  * options and actions to the client.
  */
 public interface ActionLibrary {
@@ -67,7 +67,6 @@ public interface ActionLibrary {
 
     public static class StaticFields implements ActionLibrary {
 
-
         private final int priority;
 
         public StaticFields() {
@@ -78,7 +77,6 @@ public interface ActionLibrary {
             this.priority = priority;
         }
 
-
         @Override
         public void install(ShellContext context) {
             context.register(getClass());
@@ -88,6 +86,5 @@ public interface ActionLibrary {
         public int priority() {
             return priority;
         }
-
     }
 }

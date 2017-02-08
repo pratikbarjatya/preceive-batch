@@ -38,15 +38,17 @@ public class ProcessOptions extends ActionLibrary.StaticFields {
         super(CORE);
     }
 
-    public static Action.Property<Integer> THREADS = Action.integer("threads", 1, "The number of concurrent threads/connections during batch processing.");
+    public static Action.Property<Integer> THREADS = Action.integer(
+        "threads", 1, "The number of concurrent threads/connections during batch processing.");
 
-    public static Action.Property<Integer> BACKLOG = Action.integer("backlog", 100, "The maximum number of items to be held in memory during batch processing.");
+    public static Action.Property<Integer> BACKLOG = Action.integer(
+        "backlog", 100, "The maximum number of items to be held in memory during batch processing.");
 
-    public static EndPointsAction ENDPOINTS = new EndPointsAction("endpoints",
-                                                                     "The PreCeive REST API endpoints to call.\n" +
-                                                                         "Each endpoint is of the form [field in result json]=[api path][?level=document|sentiment]\n"+
-                                                                         "e.g. -endpoints document.sentiment=/v1/sentiment?level=document sentence.sentiment=v1/sentiment?level=sentence");
-
+    public static EndPointsAction ENDPOINTS = new EndPointsAction(
+        "endpoints",
+        "The PreCeive REST API endpoints to call.\n" +
+        "Each endpoint is of the form [field in result json]=[api path][?level=document|sentiment]\n" +
+        "e.g. -endpoints document.sentiment=/v1/sentiment?level=document sentence.sentiment=v1/sentiment?level=sentence");
 
     public static EndPointProcessor newProcessor() {
         return new EndPointProcessor(
@@ -55,5 +57,4 @@ public class ProcessOptions extends ActionLibrary.StaticFields {
                 ENDPOINTS.get()
         );
     }
-
 }
