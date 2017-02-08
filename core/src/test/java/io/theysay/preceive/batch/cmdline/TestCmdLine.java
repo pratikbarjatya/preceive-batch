@@ -77,6 +77,47 @@ public class TestCmdLine {
         Assert.assertEquals(EndPoint.valueOf("document=/v1/sentiment?level=document"), endPoints[1]);
     }
 
+    @Test(expected=IllegalArgumentException.class)
+    public void testTwoUnspecifiedEndPointFields() throws Exception {
+        String[] args = {"-endpoints", "/v1/sentiment", "/v1/postag"};
+        ShellContext context = new ShellContext();
+        context.push(args).execute();
+        EndPointsAction endpoints = ProcessOptions.ENDPOINTS;
+        Assert.assertTrue(context.actions().contains(endpoints));
+        endpoints.get();
+    }
+
+    @Test(expected=IllegalArgumentException.class)
+    public void testClashingEndPointFields() throws Exception {
+        String[] args = {"-endpoints", "foo=/v1/sentiment", "bar=/v1/topic", "foo=/v1/postag"};
+        ShellContext context = new ShellContext();
+        context.push(args).execute();
+        EndPointsAction endpoints = ProcessOptions.ENDPOINTS;
+        Assert.assertTrue(context.actions().contains(endpoints));
+        endpoints.get();
+    }
+
+    @Test(expected=IllegalArgumentException.class)
+    public void testSubPathEndPointFields() throws Exception {
+        String[] args = {"-endpoints", "foo.bar=/v1/sentiment", "foo=/v1/postag"};
+        ShellContext context = new ShellContext();
+        context.push(args).execute();
+        EndPointsAction endpoints = ProcessOptions.ENDPOINTS;
+        Assert.assertTrue(context.actions().contains(endpoints));
+        endpoints.get();
+    }
+
+    @Test
+    public void testNotActuallySubPathEndPointFields() throws Exception {
+        String[] args = {"-endpoints", "foo=/v1/sentiment", "food=/v1/postag"};
+        ShellContext context = new ShellContext();
+        context.push(args).execute();
+        EndPointsAction endpoints = ProcessOptions.ENDPOINTS;
+        Assert.assertTrue(context.actions().contains(endpoints));
+        EndPoint[] endPoints = endpoints.get();
+        Assert.assertEquals(endPoints.length, 2);
+    }
+
     @Test
     public void testNumeric() throws Exception {
         String[] args = {"-threads", "99"};

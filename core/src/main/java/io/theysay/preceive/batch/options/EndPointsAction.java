@@ -28,6 +28,8 @@
 
 package io.theysay.preceive.batch.options;
 
+import java.util.Set;
+import java.util.TreeSet;
 import io.theysay.preceive.batch.api.EndPoint;
 import io.theysay.preceive.batch.cmdline.Action;
 import io.theysay.preceive.batch.cmdline.ShellContext;
@@ -52,8 +54,31 @@ public class EndPointsAction extends Action {
         this.endPoints = ep;
     }
 
+    private void validate() {
+        if (endPoints == null)
+            throw new IllegalArgumentException("At least one endpoint needs to be specified.");
+
+        TreeSet<String> paths = new TreeSet<String>();
+        for (int i = 0; i < endPoints.length; i++) {
+            String path = String.join(".", endPoints[i].getField().getPath());
+            if (!paths.add(path))
+                // exact match
+                throw new IllegalArgumentException("Clashing endpoint field: " + path);
+        }
+
+        // search for prefix match, e.g. foo & foo.bar
+        for (String path : paths) {
+            // NOTE: we add the . before the \ufffe because:
+            //   foo & foo.bar is not OK
+            //   foo & food is OK
+            Set<String> longerPaths = paths.subSet(path, path + ".\ufffe");
+            if (longerPaths.size() > 1)
+                throw new IllegalArgumentException("Clashing endpoint fields: " + longerPaths);
+        }
+    }
+
     public EndPoint[] get() {
-        if (endPoints == null) throw new IllegalArgumentException("At least one endpoint needs to be specified.");
+        validate();
         return endPoints;
     }
 }
