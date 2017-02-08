@@ -97,9 +97,7 @@ For each text (cf. line or cell), an optional `id` field can be specified.
 The `id`, which will be carried throughout the processing flow, makes it easier to align texts downstream.
 If no `id` is specified, an auto-generated value is derived with the `filename@linenumber` pattern as follows:
 
-```
-"id": "corpus/getting_started.json@00000002"
-```
+	"id": "corpus/getting_started.json@00000002"
 
 ### Output Data
 
@@ -109,15 +107,13 @@ For detailed information about the fields and structure of each JSON object, ple
 
 ### Endpoints
 
-The ```-endpoints``` option specifies the analyses that are required to be performed on the input data. 
-It takes the form of ```<enpoint url>``` for example ```/v1/sentiment```. 
-
+The ```-endpoints``` option specifies the analyses that are required to be performed on the input data.
+It takes the form of ```<enpoint url>``` for example ```/v1/sentiment```.
 
 #### Adding Parameters
 
 Additional parameters to the endpoint can be provided by append '?' followed by key=value pairs for example, ```/v1/sentiment?level=sentence```.
 The keys and values are processed such that ```/v1/sentiment?bias.positive=2&bias.negative=1&bias.neutral=0.5``` allows the specifying of the sentiments bias settings as described in the API documentation.
-
 
 #### Wrapper Fields for Multi-endpoint Calls
 
@@ -126,15 +122,12 @@ The `-endpoints` will accept multiple string arguments each will be called for e
 
 Since calls to multiple endpoints generate multiple responses, you can specify wrapper fields for the output data to organise, align, and manage the responses received. For example, you could run both document- and sentence-level sentiment analysis and store their responses in two separate containers in the final JSON output (e.g. `sentiment.document` for the former and `sentiment.sentence` for the latter) with the following `-endpoints` arguments:
 
-```
--endpoints sentiment.document=/v1/sentiment?level=document sentiment.sentence=/v1/sentiment?level=sentence  
-```
+	-endpoints sentiment.document=/v1/sentiment?level=document sentiment.sentence=/v1/sentiment?level=sentence
 
 The `-endpoints` command line option takes multiple space-separated arguments. The format is simply `wrapper=endpoint` for each endpoint definition.
 
 By default, the response data from PreCeive REST API is wrapped inside a `response` container field.
 For example, an `-endpoints` definition such as `/v1/sentiment?level=sentence` that lacks an explicit wrapper field name will be output as
-
 
 	{
 		"id":"0123456",
@@ -143,15 +136,12 @@ For example, an `-endpoints` definition such as `/v1/sentiment?level=sentence` t
 
 Correspondingly, an `-endpoints` definition with the explicit wrapper field `foo=/v1/sentiment?level=sentence` will get rendered as
 
-
 	{
 		"id": "0123456",
 		"foo": [{...},{...}]
 	}
 
-
-while the composite definition ` sentiment.holistic=/v1/sentiment?level=document sentiment.detailed=/v1/sentiment?level=sentence` would yield
-
+while the composite definition `sentiment.holistic=/v1/sentiment?level=document sentiment.detailed=/v1/sentiment?level=sentence` would yield
 
 	{
 		"id":"0123456",
@@ -161,17 +151,14 @@ while the composite definition ` sentiment.holistic=/v1/sentiment?level=document
 		}
 	}
 
-
 #### Text IDs
 
 The output data also includes the ID specified for each input text (see above).
-
 
 #### Errors
 
 If a response from PreCeive REST API contains any errors, they are output in the same field as a successful response.
 For example,
-
 
 	{
 		sentiment:{
