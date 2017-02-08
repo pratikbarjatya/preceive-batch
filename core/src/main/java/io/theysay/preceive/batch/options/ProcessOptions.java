@@ -47,7 +47,7 @@ public class ProcessOptions extends ActionLibrary.StaticFields {
     public static EndPointsAction ENDPOINTS = new EndPointsAction(
         "endpoints",
         "The PreCeive REST API endpoints to call.\n" +
-        "Each endpoint is of the form [field in result json]=[api path][?level=document|sentiment]\n" +
+        "Each endpoint is of the form [field in result json]=[api path][?level=document|sentence]\n" +
         "e.g. -endpoints document.sentiment=/v1/sentiment?level=document sentence.sentiment=v1/sentiment?level=sentence");
 
     public static EndPointProcessor newProcessor() {
