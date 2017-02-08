@@ -60,7 +60,6 @@ public class TestCmdLine {
 
         ClientSettings clientSettings = ClientOptions.getClientSettings();
 
-
         Assert.assertEquals("passy", clientSettings.getPassword());
         Assert.assertEquals("usery", clientSettings.getUsername());
         Assert.assertEquals("servicy", clientSettings.getService());
@@ -91,7 +90,6 @@ public class TestCmdLine {
         Assert.assertEquals(99, threadCount.intValue());
     }
 
-
     @Test(expected = NoSuchElementException.class)
     public void testMissingArguments() throws Exception {
         String[] args = {"-threads"};
@@ -121,7 +119,6 @@ public class TestCmdLine {
         Action.Property<String> username = ClientOptions.USERNAME;
         Assert.assertNull(username.get());
     }
-
 
     @Test
     public void testSources() throws Exception {
@@ -173,5 +170,4 @@ public class TestCmdLine {
             Assert.assertTrue(0 < macro.getArguments().length);
         }
     }
-
 }

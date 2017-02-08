@@ -62,7 +62,6 @@ public final class EndPoint {
         return parameters;
     }
 
-
     /**
      * Parse this form of String
      * {{
