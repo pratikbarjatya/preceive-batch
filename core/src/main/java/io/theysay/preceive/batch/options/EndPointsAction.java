@@ -59,8 +59,8 @@ public class EndPointsAction extends Action {
             throw new IllegalArgumentException("At least one endpoint needs to be specified.");
 
         TreeSet<String> paths = new TreeSet<String>();
-        for (int i = 0; i < endPoints.length; i++) {
-            String path = String.join(".", endPoints[i].getField().getPath());
+        for (EndPoint endPoint : endPoints) {
+            String path = String.join(".", endPoint.getField().getPath());
             if (!paths.add(path))
                 // exact match
                 throw new IllegalArgumentException("Clashing endpoint field: " + path);
