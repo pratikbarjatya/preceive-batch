@@ -58,6 +58,10 @@ The results - i.e. the responses from the PreCeive REST API - will be appended t
 
 ### Input Data
 
+Input data is provided from a file (multiple formats are supported, see below). The only part of the
+file sent to the API is the text. Parameters for an endpoint (e.g. level, ratio) are specified as
+part of the `-endpoints` argument, and should not be included in the input data file.
+
 #### JSON
 
 The app currently accepts JSON input data from a file which needs to contain strictly one (1) JSON object per line.
@@ -113,7 +117,9 @@ It takes the form of ```<enpoint url>``` for example ```/v1/sentiment```.
 #### Adding Parameters
 
 Additional parameters to the endpoint can be provided by append '?' followed by key=value pairs for example, ```/v1/sentiment?level=sentence```.
-The keys and values are processed such that ```/v1/sentiment?bias.positive=2&bias.negative=1&bias.neutral=0.5``` allows the specifying of the sentiments bias settings as described in the API documentation.
+The keys and values are processed such that ```/v1/sentiment?bias.positive=2&bias.negative=1&bias.neutral=0.5```
+allows the specifying of the sentiments bias settings as described in the API documentation. No parameters
+other than text are taken from the input data.
 
 #### Wrapper Fields for Multi-endpoint Calls
 
